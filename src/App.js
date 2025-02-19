@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
 
 function App() {
+  // Estado para almacenar la respuesta del backend
+  const [message, setMessage] = useState('Cargando...');
+
+  useEffect(() => {
+    // Obtener la URL de la API desde la variable de entorno
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    // Realizar la petición al backend
+    fetch(apiUrl)
+      .then(response => response.text())
+      .then(data => setMessage(data))
+      .catch(error => {
+        console.error('Error al conectar con el backend:', error);
+        setMessage('Error al conectar con el backend');
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+      <h1>Carta en Línea - Frontend</h1>
+      <p>{message}</p>
     </div>
   );
 }
