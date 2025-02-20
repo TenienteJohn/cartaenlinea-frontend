@@ -61,20 +61,7 @@ const Dashboard = ({ onLogout }) => {
       </button>
       {userRole === 'SUPERUSER' ? (
         <>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/dashboard/commerce">Gestionar Comercios</Link>
-              </li>
-              <li>
-                <Link to="/dashboard/categories">Gestionar Categorías</Link>
-              </li>
-              <li>
-                <Link to="/dashboard/products">Gestionar Productos</Link>
-              </li>
-            </ul>
-          </nav>
-          {/* Botón para alternar la visibilidad del formulario de creación de comercio */}
+          {/* Solo se muestra el botón para crear comercio */}
           <button onClick={() => setShowCommerceForm(!showCommerceForm)}>
             {showCommerceForm ? 'Ocultar Formulario de Comercio' : 'Crear Nuevo Comercio'}
           </button>
@@ -82,7 +69,7 @@ const Dashboard = ({ onLogout }) => {
           <Outlet />
         </>
       ) : (
-        // Si el usuario no es SUPERUSER, se asume que es OWNER y se muestra el dashboard específico para owner
+        // Dashboard para OWNER
         <OwnerDashboard />
       )}
     </div>
@@ -90,8 +77,3 @@ const Dashboard = ({ onLogout }) => {
 };
 
 export default Dashboard;
-
-
-
-
-
